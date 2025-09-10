@@ -14,7 +14,7 @@ This Guide Covers The Following Topics :
 | CPU                        | 2 CPU Cores                                                |
 | Architecture               | arm64 or amd64                                             |
 | RAM                        | 4 GB RAM                                                   |
-| PC / VPS                   | A VPS from [contabo.com](https://contabo.com) (recommended)|
+| PC / VPS                   | A VPS from [contabo.com](https://contabo.com) or [hostvds.com](https://hostvds.com/) (recommended)|
 | Private RPC                | A Private RPC from [alchemy.com](https://alchemy.com) or [quicknode.com](https://quicknode.com) |
 
 # 1. How to Setup a Trap :
