@@ -352,7 +352,7 @@ interface IMockResponse {
 }
 
 contract Trap is ITrap {
-    address public constant RESPONSE_CONTRACT = 0x25E2CeF36020A736CF8a4D2cAdD2EBE3940F4608;
+    address public constant RESPONSE_CONTRACT = 0x4608Afa7f277C8E0BE232232265850d1cDeB600E;
     string constant discordName = "DISCORD_USERNAME"; // add your discord name here
 
     function collect() external view returns (bytes memory) {
@@ -381,7 +381,7 @@ nano drosera.toml
 ```
 - Modify the values of the specified variables as follows:
 - path = "out/Trap.sol/Trap.json"
-- response_contract = "0x25E2CeF36020A736CF8a4D2cAdD2EBE3940F4608"
+- response_contract = "0x4608Afa7f277C8E0BE232232265850d1cDeB600E"
 - response_function = "respondWithDiscordName(string)"
   
 ![Image 5-31-25 at 10 01 AM](https://github.com/user-attachments/assets/5fb1624d-a2ec-4fe0-b69f-7e5b35847109)
@@ -719,75 +719,7 @@ services:
     network_mode: host
     volumes:
       - drosera_data3:/data
-    command: node --db-file-path /data/drosera.db --network-p2p-port 31317 --server-port 31318 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth
-
-
-
-
-```
-cd my-drosera-trap
-nano drosera.toml
-```
-
-- change this line:
-```
-max_number_of_operators = 2
-```
-- to the number of preferred operators you want, e.g 8:
-```
-max_number_of_operators = 8
-```
-- and this line 
-```
-whitelist = ["Operator_Address_1","Operator_address_2"]
-```
-- to
-```
-whitelist = ["Operator_Address_1","Operator_address_2""Operator_address_3”, "Operator_address_4”,”….till you get to 8”]
-```
-- after whitelisting 8 operator addresses you can then apply the changes:
-```
-DROSERA_PRIVATE_KEY=your_private_key drosera apply
-```
-
-- Update the drosera docker TOML file:
-
-NB: this is configured for 8 operators, you can change to your preferred number.
-```
-cd $home && cd drosera-operator1 && nano docker-compose.yaml
-```
-
-•hold ```control + k``` down until the file is wiped complete
-
-- Then paste this new configuration details into it.
-```
-version: '3'
-services:
-  drosera1:
-    image: ghcr.io/drosera-network/drosera-operator:latest
-    container_name: drosera-node1
-    network_mode: host
-    volumes:
-      - drosera_data1:/data
-    command: node --db-file-path /data/drosera.db --network-p2p-port 31313 --server-port 31314 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
-    restart: always
-
-  drosera2:
-    image: ghcr.io/drosera-network/drosera-operator:latest
-    container_name: drosera-node2
-    network_mode: host
-    volumes:
-      - drosera_data2:/data
-    command: node --db-file-path /data/drosera.db --network-p2p-port 31315 --server-port 31316 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY2} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
-    restart: always
-
-  drosera3:
-    image: ghcr.io/drosera-network/drosera-operator:latest
-    container_name: drosera-node3
-    network_mode: host
-    volumes:
-      - drosera_data3:/data
-    command: node --db-file-path /data/drosera.db --network-p2p-port 31317 --server-port 31318 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY3} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+command: node --db-file-path /data/drosera.db --network-p2p-port 31317 --server-port 31318 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY3} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
     restart: always
 
   drosera4:
@@ -956,3 +888,4 @@ docker compose up -d
 docker compose restart
 ```
 6. Getting red blocks after green for sometime? : just let it run, could be seed node issue from backend.
+    
