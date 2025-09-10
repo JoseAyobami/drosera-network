@@ -352,7 +352,7 @@ interface IMockResponse {
 }
 
 contract Trap is ITrap {
-    address public constant RESPONSE_CONTRACT = 0x4608Afa7f277C8E0BE232232265850d1cDeB600E;
+    address public constant RESPONSE_CONTRACT = 0x25E2CeF36020A736CF8a4D2cAdD2EBE3940F4608;
     string constant discordName = "DISCORD_USERNAME"; // add your discord name here
 
     function collect() external view returns (bytes memory) {
@@ -888,4 +888,20 @@ docker compose up -d
 docker compose restart
 ```
 6. Getting red blocks after green for sometime? : just let it run, could be seed node issue from backend.
+
+7. ##  How to Fix common IP/firewall Issues Red Node
+
+---
+
+### 🔧 For VPS:
+- ✅ **Ensure external firewall is open**  
+  *(e.g., cloud provider security group, firewalls in Vultr, AWS, Oracle, etc.)*
+- ✅ **Ensure internal firewall is open**
+
+```bash
+sudo ufw allow <your_node_port>
+sudo ufw reload
+```
+
+---
     
