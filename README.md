@@ -720,3 +720,239 @@ services:
     volumes:
       - drosera_data3:/data
     command: node --db-file-path /data/drosera.db --network-p2p-port 31317 --server-port 31318 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth
+
+
+
+
+```
+cd my-drosera-trap
+nano drosera.toml
+```
+
+- change this line:
+```
+max_number_of_operators = 2
+```
+- to the number of preferred operators you want, e.g 8:
+```
+max_number_of_operators = 8
+```
+- and this line 
+```
+whitelist = ["Operator_Address_1","Operator_address_2"]
+```
+- to
+```
+whitelist = ["Operator_Address_1","Operator_address_2""Operator_address_3”, "Operator_address_4”,”….till you get to 8”]
+```
+- after whitelisting 8 operator addresses you can then apply the changes:
+```
+DROSERA_PRIVATE_KEY=your_private_key drosera apply
+```
+
+- Update the drosera docker TOML file:
+
+NB: this is configured for 8 operators, you can change to your preferred number.
+```
+cd $home && cd drosera-operator1 && nano docker-compose.yaml
+```
+
+•hold ```control + k``` down until the file is wiped complete
+
+- Then paste this new configuration details into it.
+```
+version: '3'
+services:
+  drosera1:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node1
+    network_mode: host
+    volumes:
+      - drosera_data1:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31313 --server-port 31314 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera2:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node2
+    network_mode: host
+    volumes:
+      - drosera_data2:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31315 --server-port 31316 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY2} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera3:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node3
+    network_mode: host
+    volumes:
+      - drosera_data3:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31317 --server-port 31318 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY3} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera4:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node4
+    network_mode: host
+    volumes:
+      - drosera_data4:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31319 --server-port 31320 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY4} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera5:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node5
+    network_mode: host
+    volumes:
+      - drosera_data5:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31321 --server-port 31322 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY5} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera6:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node6
+    network_mode: host
+    volumes:
+      - drosera_data6:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31323 --server-port 31324 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY6} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera7:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node7
+    network_mode: host
+    volumes:
+      - drosera_data7:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31325 --server-port 31326 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY7} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+  drosera8:
+    image: ghcr.io/drosera-network/drosera-operator:latest
+    container_name: drosera-node8
+    network_mode: host
+    volumes:
+      - drosera_data8:/data
+    command: node --db-file-path /data/drosera.db --network-p2p-port 31327 --server-port 31328 --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-backup-rpc-url https://hoodi.drpc.org --drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D --eth-private-key ${ETH_PRIVATE_KEY8} --listen-address 0.0.0.0 --network-external-p2p-address ${VPS_IP} --disable-dnr-confirmation true
+    restart: always
+
+volumes:
+  drosera_data1:
+  drosera_data2:
+  drosera_data3:
+  drosera_data4:
+  drosera_data5:
+  drosera_data6:
+  drosera_data7:
+  drosera_data8:
+```
+save using ```control + x, y & enter```
+
+- update your .env file.
+
+```
+nano .env
+```
+- change this:
+```bash
+ETH_PRIVATE_KEY=
+ETH_PRIVATE_KEY2=
+VPS_IP=
+P2P_PORT1=31313
+SERVER_PORT1=31314
+P2P_PORT2=31315
+SERVER_PORT2=31316
+```
+
+- to this:
+```
+# Ethereum private keys
+ETH_PRIVATE_KEY=
+ETH_PRIVATE_KEY2=
+ETH_PRIVATE_KEY3=
+ETH_PRIVATE_KEY4=
+ETH_PRIVATE_KEY5=
+ETH_PRIVATE_KEY6=
+ETH_PRIVATE_KEY7=
+ETH_PRIVATE_KEY8=
+
+# VPS IP address (shared across all nodes)
+VPS_IP=
+
+# P2P and server ports
+P2P_PORT1=31313
+SERVER_PORT1=31314
+
+P2P_PORT2=31315
+SERVER_PORT2=31316
+
+P2P_PORT3=31317
+SERVER_PORT3=31318
+
+P2P_PORT4=31319
+SERVER_PORT4=31320
+
+P2P_PORT5=31321
+SERVER_PORT5=31322
+
+P2P_PORT6=31323
+SERVER_PORT6=31324
+
+P2P_PORT7=31325
+SERVER_PORT7=31326
+
+P2P_PORT8=31327
+SERVER_PORT8=31328
+```
+
+save using control + x,y and enter.
+
+- Register all operator addresses and opt them in:
+
+•claim hoodi faucet before you start. (hoodi faucet)[https://hoodifaucet.io].
+- register key 1:
+```
+drosera-operator register --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-private-key your_private_key1_here –-drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D
+```
+- register key 2:
+```
+drosera-operator register --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-private-key your_private_key2_here –-drosera-address 0x91cB447BaFc6e0EA0F4Fe056F5a9b1F14bb06e5D
+```
+• continue until you register all 8.
+
+- opt-in key 1:
+  
+```
+drosera-operator optin --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-private-key your_private_key2_here --trap-config-address your_trap_address_here
+```
+- opt-in key 2:
+```
+drosera-operator optin --eth-rpc-url https://ethereum-hoodi-rpc.publicnode.com --eth-private-key your_private_key1_here --trap-config-address your_trap_address_here
+```
+• continue until you opt them all in. 
+
+- now remove the existing drosera node and rerun with latest one:
+```
+docker-compose down && docker compose up -d
+```
+
+• all 8 addreses should be opted in and fully functional.
+## Debugging common Errors
+
+1. operator config timeout not elapsed when trying to apply : simply wait and try after 15mins.
+
+2. Getting red blocks only? Ensure your ports are open by running the allow drosera ports commands again.
+
+3. Second operator not showing to opt in on the trap site? Opt in with cli method :
+```bash
+drosera-operator optin --eth-rpc-url https://ethereum-holesky-rpc.publicnode.com --eth-private-key 2nd_Operator_Privatekey --trap-config-address Trap_Address
+```
+4. Onlyowner error when trying to apply? : make sure you’re using same private key you used to deploy trap to apply again.
+
+5. Restart operators? :
+
+```bash
+docker compose up -d
+# OR
+docker compose restart
+```
+6. Getting red blocks after green for sometime? : just let it run, could be seed node issue from backend.
