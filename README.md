@@ -887,9 +887,9 @@ docker compose up -d
 # OR
 docker compose restart
 ```
-6. Getting red blocks after green for sometime? : just let it run, could be seed node issue from backend.
+## Getting red blocks after green for sometime? : just let it run, could be seed node issue from backend.
 
-7. ##  How to Fix common IP/firewall Issues Red Node
+  # How to Fix common IP/firewall Issues Red Node
 
 ---
 
